@@ -1,0 +1,860 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Phonebook2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Card">
+          <Key>
+            <PropertyRef Name="CardID" />
+          </Key>
+          <Property Name="CardID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeOfCardID" Type="int" Nullable="false" />
+          <Property Name="PersonID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentID" />
+          </Key>
+          <Property Name="DepartmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmentName" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FloorRoom">
+          <Key>
+            <PropertyRef Name="FloorRoomID" />
+          </Key>
+          <Property Name="FloorRoomID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FloorNumber" Type="int" Nullable="false" />
+          <Property Name="PersonID" Type="int" Nullable="false" />
+          <Property Name="RoomID" Type="int" />
+        </EntityType>
+        <EntityType Name="JobTitle">
+          <Key>
+            <PropertyRef Name="JobTitleID" />
+          </Key>
+          <Property Name="JobTitleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobTitle" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="LanguageID" />
+          </Key>
+          <Property Name="LanguageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Language" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LanguagePerson">
+          <Key>
+            <PropertyRef Name="LanguagePersonID" />
+          </Key>
+          <Property Name="LanguagePersonID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LanguageLevel" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CertificateInstitute" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="LanguageID" Type="int" Nullable="false" />
+          <Property Name="PersonID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Office">
+          <Key>
+            <PropertyRef Name="OfficeID" />
+          </Key>
+          <Property Name="OfficeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Adress" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="PersonID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="PersonSurname" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="PersonSecondName" Type="varchar" MaxLength="255" />
+          <Property Name="PhoneNumber" Type="int" Nullable="false" />
+          <Property Name="EMail" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Sex" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="JobTitleID" Type="int" Nullable="false" />
+          <Property Name="TeamID" Type="int" Nullable="false" />
+          <Property Name="OfficeID" Type="int" Nullable="false" />
+          <Property Name="BossID" Type="int" />
+          <Property Name="DepartmentID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonTitle">
+          <Key>
+            <PropertyRef Name="PersonTitleID" />
+          </Key>
+          <Property Name="PersonTitleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonID" Type="int" Nullable="false" />
+          <Property Name="TitleID" Type="int" Nullable="false" />
+          <Property Name="Institute" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Date" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="RoomID" />
+          </Key>
+          <Property Name="RoomID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoomNumber" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="TeamID" />
+          </Key>
+          <Property Name="TeamID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TeamName" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Title">
+          <Key>
+            <PropertyRef Name="TitleID" />
+          </Key>
+          <Property Name="TitleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeOfCard">
+          <Key>
+            <PropertyRef Name="TypeOfCardID" />
+          </Key>
+          <Property Name="TypeOfCardID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeOfCard" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Card_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Card" Type="Self.Card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="Card">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Card_TypeOfCard">
+          <End Role="TypeOfCard" Type="Self.TypeOfCard" Multiplicity="1" />
+          <End Role="Card" Type="Self.Card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfCard">
+              <PropertyRef Name="TypeOfCardID" />
+            </Principal>
+            <Dependent Role="Card">
+              <PropertyRef Name="TypeOfCardID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FloorRoom_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="FloorRoom" Type="Self.FloorRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="FloorRoom">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FloorRoom_Room">
+          <End Role="Room" Type="Self.Room" Multiplicity="0..1" />
+          <End Role="FloorRoom" Type="Self.FloorRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="RoomID" />
+            </Principal>
+            <Dependent Role="FloorRoom">
+              <PropertyRef Name="RoomID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LanguagePerson_Language">
+          <End Role="Language" Type="Self.Language" Multiplicity="1" />
+          <End Role="LanguagePerson" Type="Self.LanguagePerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="LanguageID" />
+            </Principal>
+            <Dependent Role="LanguagePerson">
+              <PropertyRef Name="LanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LanguagePerson_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="LanguagePerson" Type="Self.LanguagePerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="LanguagePerson">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Person_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="Person" Type="Self.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentID" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Person_JobTitle">
+          <End Role="JobTitle" Type="Self.JobTitle" Multiplicity="1" />
+          <End Role="Person" Type="Self.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobTitle">
+              <PropertyRef Name="JobTitleID" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="JobTitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Person_Office">
+          <End Role="Office" Type="Self.Office" Multiplicity="1" />
+          <End Role="Person" Type="Self.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office">
+              <PropertyRef Name="OfficeID" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="OfficeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Person_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Person1" Type="Self.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="Person1">
+              <PropertyRef Name="BossID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Person_Team">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="Person" Type="Self.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamID" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonTitle_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="PersonTitle" Type="Self.PersonTitle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="PersonTitle">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonTitle_Title">
+          <End Role="Title" Type="Self.Title" Multiplicity="1" />
+          <End Role="PersonTitle" Type="Self.PersonTitle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Title">
+              <PropertyRef Name="TitleID" />
+            </Principal>
+            <Dependent Role="PersonTitle">
+              <PropertyRef Name="TitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Phonebook2ModelStoreContainer">
+          <EntitySet Name="Card" EntityType="Self.Card" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FloorRoom" EntityType="Self.FloorRoom" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobTitle" EntityType="Self.JobTitle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LanguagePerson" EntityType="Self.LanguagePerson" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Office" EntityType="Self.Office" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonTitle" EntityType="Self.PersonTitle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Title" EntityType="Self.Title" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeOfCard" EntityType="Self.TypeOfCard" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Card_Person" Association="Self.FK_Card_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Card" EntitySet="Card" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Card_TypeOfCard" Association="Self.FK_Card_TypeOfCard">
+            <End Role="TypeOfCard" EntitySet="TypeOfCard" />
+            <End Role="Card" EntitySet="Card" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FloorRoom_Person" Association="Self.FK_FloorRoom_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="FloorRoom" EntitySet="FloorRoom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FloorRoom_Room" Association="Self.FK_FloorRoom_Room">
+            <End Role="Room" EntitySet="Room" />
+            <End Role="FloorRoom" EntitySet="FloorRoom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LanguagePerson_Language" Association="Self.FK_LanguagePerson_Language">
+            <End Role="Language" EntitySet="Language" />
+            <End Role="LanguagePerson" EntitySet="LanguagePerson" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LanguagePerson_Person" Association="Self.FK_LanguagePerson_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="LanguagePerson" EntitySet="LanguagePerson" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_Department" Association="Self.FK_Person_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Person" EntitySet="Person" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_JobTitle" Association="Self.FK_Person_JobTitle">
+            <End Role="JobTitle" EntitySet="JobTitle" />
+            <End Role="Person" EntitySet="Person" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_Office" Association="Self.FK_Person_Office">
+            <End Role="Office" EntitySet="Office" />
+            <End Role="Person" EntitySet="Person" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_Person" Association="Self.FK_Person_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Person1" EntitySet="Person" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_Team" Association="Self.FK_Person_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Person" EntitySet="Person" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonTitle_Person" Association="Self.FK_PersonTitle_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="PersonTitle" EntitySet="PersonTitle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonTitle_Title" Association="Self.FK_PersonTitle_Title">
+            <End Role="Title" EntitySet="Title" />
+            <End Role="PersonTitle" EntitySet="PersonTitle" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Phonebook2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Card">
+          <Key>
+            <PropertyRef Name="CardID" />
+          </Key>
+          <Property Name="CardID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeOfCardID" Type="Int32" Nullable="false" />
+          <Property Name="PersonID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_Card_Person" FromRole="Card" ToRole="Person" />
+          <NavigationProperty Name="TypeOfCard" Relationship="Self.FK_Card_TypeOfCard" FromRole="Card" ToRole="TypeOfCard" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentID" />
+          </Key>
+          <Property Name="DepartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="People" Relationship="Self.FK_Person_Department" FromRole="Department" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="FloorRoom">
+          <Key>
+            <PropertyRef Name="FloorRoomID" />
+          </Key>
+          <Property Name="FloorRoomID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FloorNumber" Type="Int32" Nullable="false" />
+          <Property Name="PersonID" Type="Int32" Nullable="false" />
+          <Property Name="RoomID" Type="Int32" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_FloorRoom_Person" FromRole="FloorRoom" ToRole="Person" />
+          <NavigationProperty Name="Room" Relationship="Self.FK_FloorRoom_Room" FromRole="FloorRoom" ToRole="Room" />
+        </EntityType>
+        <EntityType Name="JobTitle">
+          <Key>
+            <PropertyRef Name="JobTitleID" />
+          </Key>
+          <Property Name="JobTitleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobTitle1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="People" Relationship="Self.FK_Person_JobTitle" FromRole="JobTitle" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="LanguageID" />
+          </Key>
+          <Property Name="LanguageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Language1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="LanguagePersons" Relationship="Self.FK_LanguagePerson_Language" FromRole="Language" ToRole="LanguagePerson" />
+        </EntityType>
+        <EntityType Name="LanguagePerson">
+          <Key>
+            <PropertyRef Name="LanguagePersonID" />
+          </Key>
+          <Property Name="LanguagePersonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LanguageLevel" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CertificateInstitute" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LanguageID" Type="Int32" Nullable="false" />
+          <Property Name="PersonID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Language" Relationship="Self.FK_LanguagePerson_Language" FromRole="LanguagePerson" ToRole="Language" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_LanguagePerson_Person" FromRole="LanguagePerson" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Office">
+          <Key>
+            <PropertyRef Name="OfficeID" />
+          </Key>
+          <Property Name="OfficeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adress" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="People" Relationship="Self.FK_Person_Office" FromRole="Office" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="PersonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PersonSurname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PersonSecondName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="Int32" Nullable="false" />
+          <Property Name="EMail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sex" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="JobTitleID" Type="Int32" Nullable="false" />
+          <Property Name="TeamID" Type="Int32" Nullable="false" />
+          <Property Name="OfficeID" Type="Int32" Nullable="false" />
+          <Property Name="BossID" Type="Int32" />
+          <Property Name="DepartmentID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cards" Relationship="Self.FK_Card_Person" FromRole="Person" ToRole="Card" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_Person_Department" FromRole="Person" ToRole="Department" />
+          <NavigationProperty Name="FloorRooms" Relationship="Self.FK_FloorRoom_Person" FromRole="Person" ToRole="FloorRoom" />
+          <NavigationProperty Name="JobTitle" Relationship="Self.FK_Person_JobTitle" FromRole="Person" ToRole="JobTitle" />
+          <NavigationProperty Name="LanguagePersons" Relationship="Self.FK_LanguagePerson_Person" FromRole="Person" ToRole="LanguagePerson" />
+          <NavigationProperty Name="Office" Relationship="Self.FK_Person_Office" FromRole="Person" ToRole="Office" />
+          <NavigationProperty Name="Person1" Relationship="Self.FK_Person_Person" FromRole="Person" ToRole="Person1" />
+          <NavigationProperty Name="Person2" Relationship="Self.FK_Person_Person" FromRole="Person1" ToRole="Person" />
+          <NavigationProperty Name="Team" Relationship="Self.FK_Person_Team" FromRole="Person" ToRole="Team" />
+          <NavigationProperty Name="PersonTitles" Relationship="Self.FK_PersonTitle_Person" FromRole="Person" ToRole="PersonTitle" />
+        </EntityType>
+        <EntityType Name="PersonTitle">
+          <Key>
+            <PropertyRef Name="PersonTitleID" />
+          </Key>
+          <Property Name="PersonTitleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonID" Type="Int32" Nullable="false" />
+          <Property Name="TitleID" Type="Int32" Nullable="false" />
+          <Property Name="Institute" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_PersonTitle_Person" FromRole="PersonTitle" ToRole="Person" />
+          <NavigationProperty Name="Title" Relationship="Self.FK_PersonTitle_Title" FromRole="PersonTitle" ToRole="Title" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="RoomID" />
+          </Key>
+          <Property Name="RoomID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoomNumber" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FloorRooms" Relationship="Self.FK_FloorRoom_Room" FromRole="Room" ToRole="FloorRoom" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="TeamID" />
+          </Key>
+          <Property Name="TeamID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeamName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="People" Relationship="Self.FK_Person_Team" FromRole="Team" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Title">
+          <Key>
+            <PropertyRef Name="TitleID" />
+          </Key>
+          <Property Name="TitleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PersonTitles" Relationship="Self.FK_PersonTitle_Title" FromRole="Title" ToRole="PersonTitle" />
+        </EntityType>
+        <EntityType Name="TypeOfCard">
+          <Key>
+            <PropertyRef Name="TypeOfCardID" />
+          </Key>
+          <Property Name="TypeOfCardID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeOfCard1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Cards" Relationship="Self.FK_Card_TypeOfCard" FromRole="TypeOfCard" ToRole="Card" />
+        </EntityType>
+        <Association Name="FK_Card_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Card" Type="Self.Card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="Card">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Card_TypeOfCard">
+          <End Role="TypeOfCard" Type="Self.TypeOfCard" Multiplicity="1" />
+          <End Role="Card" Type="Self.Card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfCard">
+              <PropertyRef Name="TypeOfCardID" />
+            </Principal>
+            <Dependent Role="Card">
+              <PropertyRef Name="TypeOfCardID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Person_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="Person" Type="Self.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentID" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FloorRoom_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="FloorRoom" Type="Self.FloorRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="FloorRoom">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FloorRoom_Room">
+          <End Role="Room" Type="Self.Room" Multiplicity="0..1" />
+          <End Role="FloorRoom" Type="Self.FloorRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="RoomID" />
+            </Principal>
+            <Dependent Role="FloorRoom">
+              <PropertyRef Name="RoomID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Person_JobTitle">
+          <End Role="JobTitle" Type="Self.JobTitle" Multiplicity="1" />
+          <End Role="Person" Type="Self.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobTitle">
+              <PropertyRef Name="JobTitleID" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="JobTitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LanguagePerson_Language">
+          <End Role="Language" Type="Self.Language" Multiplicity="1" />
+          <End Role="LanguagePerson" Type="Self.LanguagePerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="LanguageID" />
+            </Principal>
+            <Dependent Role="LanguagePerson">
+              <PropertyRef Name="LanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LanguagePerson_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="LanguagePerson" Type="Self.LanguagePerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="LanguagePerson">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Person_Office">
+          <End Role="Office" Type="Self.Office" Multiplicity="1" />
+          <End Role="Person" Type="Self.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office">
+              <PropertyRef Name="OfficeID" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="OfficeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Person_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Person1" Type="Self.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="Person1">
+              <PropertyRef Name="BossID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Person_Team">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="Person" Type="Self.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamID" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonTitle_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="PersonTitle" Type="Self.PersonTitle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="PersonTitle">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonTitle_Title">
+          <End Role="Title" Type="Self.Title" Multiplicity="1" />
+          <End Role="PersonTitle" Type="Self.PersonTitle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Title">
+              <PropertyRef Name="TitleID" />
+            </Principal>
+            <Dependent Role="PersonTitle">
+              <PropertyRef Name="TitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Phonebook2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cards" EntityType="Self.Card" />
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="FloorRooms" EntityType="Self.FloorRoom" />
+          <EntitySet Name="JobTitles" EntityType="Self.JobTitle" />
+          <EntitySet Name="Languages" EntityType="Self.Language" />
+          <EntitySet Name="LanguagePersons" EntityType="Self.LanguagePerson" />
+          <EntitySet Name="Offices" EntityType="Self.Office" />
+          <EntitySet Name="People" EntityType="Self.Person" />
+          <EntitySet Name="PersonTitles" EntityType="Self.PersonTitle" />
+          <EntitySet Name="Rooms" EntityType="Self.Room" />
+          <EntitySet Name="Teams" EntityType="Self.Team" />
+          <EntitySet Name="Titles" EntityType="Self.Title" />
+          <EntitySet Name="TypeOfCards" EntityType="Self.TypeOfCard" />
+          <AssociationSet Name="FK_Card_Person" Association="Self.FK_Card_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Card" EntitySet="Cards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Card_TypeOfCard" Association="Self.FK_Card_TypeOfCard">
+            <End Role="TypeOfCard" EntitySet="TypeOfCards" />
+            <End Role="Card" EntitySet="Cards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_Department" Association="Self.FK_Person_Department">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Person" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FloorRoom_Person" Association="Self.FK_FloorRoom_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="FloorRoom" EntitySet="FloorRooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FloorRoom_Room" Association="Self.FK_FloorRoom_Room">
+            <End Role="Room" EntitySet="Rooms" />
+            <End Role="FloorRoom" EntitySet="FloorRooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_JobTitle" Association="Self.FK_Person_JobTitle">
+            <End Role="JobTitle" EntitySet="JobTitles" />
+            <End Role="Person" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LanguagePerson_Language" Association="Self.FK_LanguagePerson_Language">
+            <End Role="Language" EntitySet="Languages" />
+            <End Role="LanguagePerson" EntitySet="LanguagePersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LanguagePerson_Person" Association="Self.FK_LanguagePerson_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="LanguagePerson" EntitySet="LanguagePersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_Office" Association="Self.FK_Person_Office">
+            <End Role="Office" EntitySet="Offices" />
+            <End Role="Person" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_Person" Association="Self.FK_Person_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Person1" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_Team" Association="Self.FK_Person_Team">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="Person" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonTitle_Person" Association="Self.FK_PersonTitle_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="PersonTitle" EntitySet="PersonTitles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonTitle_Title" Association="Self.FK_PersonTitle_Title">
+            <End Role="Title" EntitySet="Titles" />
+            <End Role="PersonTitle" EntitySet="PersonTitles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Phonebook2ModelStoreContainer" CdmEntityContainer="Phonebook2Entities">
+          <EntitySetMapping Name="Cards">
+            <EntityTypeMapping TypeName="Phonebook2Model.Card">
+              <MappingFragment StoreEntitySet="Card">
+                <ScalarProperty Name="CardID" ColumnName="CardID" />
+                <ScalarProperty Name="TypeOfCardID" ColumnName="TypeOfCardID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="Phonebook2Model.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FloorRooms">
+            <EntityTypeMapping TypeName="Phonebook2Model.FloorRoom">
+              <MappingFragment StoreEntitySet="FloorRoom">
+                <ScalarProperty Name="FloorRoomID" ColumnName="FloorRoomID" />
+                <ScalarProperty Name="FloorNumber" ColumnName="FloorNumber" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobTitles">
+            <EntityTypeMapping TypeName="Phonebook2Model.JobTitle">
+              <MappingFragment StoreEntitySet="JobTitle">
+                <ScalarProperty Name="JobTitleID" ColumnName="JobTitleID" />
+                <ScalarProperty Name="JobTitle1" ColumnName="JobTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Languages">
+            <EntityTypeMapping TypeName="Phonebook2Model.Language">
+              <MappingFragment StoreEntitySet="Language">
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="Language1" ColumnName="Language" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LanguagePersons">
+            <EntityTypeMapping TypeName="Phonebook2Model.LanguagePerson">
+              <MappingFragment StoreEntitySet="LanguagePerson">
+                <ScalarProperty Name="LanguagePersonID" ColumnName="LanguagePersonID" />
+                <ScalarProperty Name="LanguageLevel" ColumnName="LanguageLevel" />
+                <ScalarProperty Name="CertificateInstitute" ColumnName="CertificateInstitute" />
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Offices">
+            <EntityTypeMapping TypeName="Phonebook2Model.Office">
+              <MappingFragment StoreEntitySet="Office">
+                <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="Phonebook2Model.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="PersonName" ColumnName="PersonName" />
+                <ScalarProperty Name="PersonSurname" ColumnName="PersonSurname" />
+                <ScalarProperty Name="PersonSecondName" ColumnName="PersonSecondName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="EMail" ColumnName="EMail" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="JobTitleID" ColumnName="JobTitleID" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
+                <ScalarProperty Name="BossID" ColumnName="BossID" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonTitles">
+            <EntityTypeMapping TypeName="Phonebook2Model.PersonTitle">
+              <MappingFragment StoreEntitySet="PersonTitle">
+                <ScalarProperty Name="PersonTitleID" ColumnName="PersonTitleID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="TitleID" ColumnName="TitleID" />
+                <ScalarProperty Name="Institute" ColumnName="Institute" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rooms">
+            <EntityTypeMapping TypeName="Phonebook2Model.Room">
+              <MappingFragment StoreEntitySet="Room">
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="RoomNumber" ColumnName="RoomNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teams">
+            <EntityTypeMapping TypeName="Phonebook2Model.Team">
+              <MappingFragment StoreEntitySet="Team">
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Titles">
+            <EntityTypeMapping TypeName="Phonebook2Model.Title">
+              <MappingFragment StoreEntitySet="Title">
+                <ScalarProperty Name="TitleID" ColumnName="TitleID" />
+                <ScalarProperty Name="Title1" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeOfCards">
+            <EntityTypeMapping TypeName="Phonebook2Model.TypeOfCard">
+              <MappingFragment StoreEntitySet="TypeOfCard">
+                <ScalarProperty Name="TypeOfCardID" ColumnName="TypeOfCardID" />
+                <ScalarProperty Name="TypeOfCard1" ColumnName="TypeOfCard" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
