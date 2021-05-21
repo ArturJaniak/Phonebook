@@ -1,0 +1,27 @@
+<div class="container">
+    <h1>Phonebook</h1>
+    <table class="table table-bordered">
+      <thead class ="thead thead-light">
+          <tr>
+                  <th><i>Name</i></th>
+                  <th><i>Position</i></th>
+                  <th><i>Department</i></th>
+                  <th><i>Phone</i></th>
+                  <th><i>Office</i></th>
+                  <th><i>Options</i></th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let dataItem of PersonList; let indexOfpeople=index;">
+             <!--{{indexOfpeople}} value : {{dataItem.PersonName}}--> 
+              <td>{{dataItem.PersonName}} {{dataItem.PersonSecondName}} {{dataItem.PersonSurname}}</td>
+              <td>{{dataItem.JobTitle.JobTitle1}}</td>
+              <td>{{dataItem.Department.DepartmentName}}</td>
+              <td>{{dataItem.PhoneNumber}}</td>
+              <td>{{dataItem.Office.City}}</td>
+             
+                 <td><button class="m1 btn btn-light btn-outline-primary" [routerLink]="['/person/',dataItem.PersonID]" Button> Personsafs</button>    
+                 </td>                                                    
+      </tbody>
+    </table>
+</div>
