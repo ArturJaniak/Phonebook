@@ -1,0 +1,37 @@
+<div>
+    <!-- <table class="table table-bordered"> -->
+        <thead class ="thead thead-light">
+            <!-- <tr>
+                    <th><i>Name</i></th>
+                    <th><i>Position</i></th>
+                    <th><i>Department</i></th>
+                    <th><i>Phone</i></th>
+                    <th><i>Office</i></th>
+
+            </tr> -->
+        </thead>
+        <tbody>
+            <tr *ngFor="let dataItem of PersonList;let i = index" [attr.data-index]="i">
+                <div><tr *ngIf="i==2-1">
+                <!--IMPORTANT GET ID VALUE HERE INSTEAD OF 2-->
+                    <p>Name: {{dataItem.PersonName}} {{dataItem.PersonSecondName}} {{dataItem.PersonSurname}}</p>
+                    <p>Job: {{dataItem.JobTitle.JobTitle1}}</p>
+                    <p>Department: {{dataItem.Department.DepartmentName}}</p>
+                    <p>Phone Number: {{dataItem.PhoneNumber}}</p>
+                    <p>Office: {{dataItem.Office.City}}</p>        
+                    <p>Email: {{dataItem.EMail}}</p>
+                    <p>Sex: {{dataItem.Sex}}</p>
+                    <p>TeamID: {{dataItem.TeamID}}</p>
+                    <p>BossID: {{dataItem.BossID}}</p>
+
+                    <b>Language: </b> 
+                    <b>{{dataItem.LanguagePersons[0].Language.Language1}},</b> 
+                    <b>{{dataItem.LanguagePersons[1].Language.Language1}}, </b>
+                    <b>{{dataItem.LanguagePersons[2].Language.Language1}},</b>
+                    <b>{{dataItem.LanguagePersons[3].Language.Language1}} </b>
+                
+
+                </div>
+            </tbody>
+                   <!-- </table> -->
+                </div>
